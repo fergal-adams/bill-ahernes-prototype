@@ -1,0 +1,808 @@
+@font-face {
+  font-family: "Season Mix";
+  src: url("assets/Season Mix/SeasonMix-TRIAL-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Season Mix";
+  src: url("assets/Season Mix/SeasonMix-TRIAL-Heavy.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Season Mix";
+  src: url("assets/Season Mix/SeasonMix-TRIAL-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --navy: #05222f;
+  --navy-text: #05232f;
+  --gold: #f7c441;
+  --gold-tagline: #ffc645;
+  --cream: rgba(201, 165, 61, 0.2);
+  --white: #fdfdfd;
+  --grey-placeholder: #d9d9d9;
+
+  --font-display: "Season Mix", Georgia, "Times New Roman", serif;
+  --font-body: "Season Mix", Georgia, "Times New Roman", serif;
+
+  --header-height: 64px;
+  --footer-height: 92px;
+  --gutter: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 500;
+  background: var(--navy);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 1em;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+.headline {
+  font-size: 32px;
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+
+/* Content stays invisible until it has scrolled clear of the fixed
+   footer, so it never visually collides with the opening-hours text. */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Fixed header */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-height);
+  padding: 8px var(--gutter);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+  text-align: center;
+  transition: background 0.4s ease;
+}
+
+.site-header.is-light {
+  background: linear-gradient(to bottom, rgba(244, 237, 216, 1) 0%, rgba(244, 237, 216, 0) 100%);
+}
+
+.site-header .logo {
+  width: 190px;
+  aspect-ratio: 322 / 51;
+  background-color: var(--gold);
+  -webkit-mask: url("assets/BA_logo.svg") no-repeat center / contain;
+  mask: url("assets/BA_logo.svg") no-repeat center / contain;
+  transition: background-color 0.4s ease;
+}
+
+.site-header.is-light .logo {
+  background-color: var(--navy-text);
+}
+
+/* Fixed footer */
+
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px var(--gutter);
+  min-height: var(--footer-height);
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 100%);
+  transition: background 0.4s ease;
+}
+
+.site-footer.is-light {
+  background: linear-gradient(to top, rgba(244, 237, 216, 0.92) 0%, rgba(244, 237, 216, 0) 100%);
+}
+
+.site-footer .monogram {
+  flex-shrink: 0;
+  width: 34px;
+  height: 40px;
+  background-color: var(--gold);
+  -webkit-mask: url("assets/footer-logo.svg") no-repeat center / contain;
+  mask: url("assets/footer-logo.svg") no-repeat center / contain;
+  transition: background-color 0.4s ease;
+}
+
+.site-footer .hours {
+  color: var(--white);
+  transition: color 0.4s ease;
+}
+
+.site-footer .hours p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 4px;
+}
+
+.site-footer .hours p:last-child {
+  margin-bottom: 0;
+}
+
+/* footer flips to navy over light sections */
+.site-footer.is-light .monogram {
+  background-color: var(--navy-text);
+}
+
+.site-footer.is-light .hours {
+  color: var(--navy-text);
+}
+
+/* Layout */
+
+main {
+  padding-top: 0;
+}
+
+.panel {
+  position: relative;
+  padding: calc(var(--header-height) + 40px) var(--gutter) calc(var(--footer-height) + 40px);
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero */
+
+.hero {
+  background-image: url("assets/homepage_hero_mobile.jpg");
+  background-size: cover;
+  background-position: center;
+  justify-content: flex-start;
+  padding-top: calc(var(--header-height) + 60px);
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero__headline {
+  position: relative;
+  font-size: 34px;
+  line-height: 1.25;
+  color: var(--white);
+  max-width: 340px;
+}
+
+/* Walk-ins */
+
+.walk-ins {
+  background: var(--navy);
+  justify-content: flex-start;
+}
+
+.walk-ins .address {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 32px;
+}
+
+.walk-ins .address a {
+  display: inline-block;
+  margin-top: 4px;
+  text-decoration: underline;
+}
+
+.placeholder {
+  background: var(--grey-placeholder);
+  border-radius: 2px;
+}
+
+.placeholder--map {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 233 / 288;
+}
+
+/* Stop by for a drink */
+
+.drink {
+  background-color: #f4edd8;
+  color: var(--navy-text);
+}
+
+.drink-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.drink-item {
+  width: 62%;
+  margin-bottom: 44px;
+}
+
+.drink-item--offset {
+  align-self: flex-end;
+  width: 62%;
+  margin-top: -16px;
+}
+
+.drink-item--full {
+  width: 100%;
+  align-self: stretch;
+}
+
+.drink-item h3 {
+  font-size: 26px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.drink-item p {
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 233px;
+  margin: 0;
+}
+
+/* Family story */
+
+.story {
+  background-color: #f4edd8;
+  color: var(--navy-text);
+}
+
+.story .headline {
+  font-size: 28px;
+  margin-bottom: 28px;
+}
+
+.story__grid {
+  display: grid;
+  grid-template-columns: minmax(90px, 32%) 1fr;
+  grid-template-areas:
+    "portrait para1"
+    "para2 para2"
+    "wide wide";
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 32px;
+}
+
+.story__grid > *:nth-child(1) { grid-area: portrait; }
+.story__grid > *:nth-child(2) { grid-area: para1; margin-bottom: 0; }
+.story__grid > *:nth-child(3) { grid-area: wide; }
+.story__grid > *:nth-child(4) { grid-area: para2; }
+
+.placeholder--portrait {
+  width: 100%;
+  aspect-ratio: 127 / 266;
+  background-image: url("assets/Bill-pulling-pint 1.png");
+  background-size: cover;
+  background-position: 80% center;
+}
+
+.story__text {
+  font-size: 15px;
+  max-width: 260px;
+  margin-bottom: 24px;
+}
+
+.placeholder--wide {
+  width: 100%;
+  aspect-ratio: 400 / 250;
+  margin-top: 12px;
+  background-image: url("assets/Bill-filling-the-McCarthy-cup 1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Host at Bill's */
+
+.host {
+  background: var(--navy);
+}
+
+.host .headline {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.host__text {
+  font-size: 15px;
+  max-width: 260px;
+  margin-bottom: 24px;
+}
+
+.get-in-touch {
+  font-weight: 800;
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--white);
+  margin-bottom: 32px;
+  display: inline-block;
+}
+
+.placeholder--backroom {
+  width: 100%;
+  aspect-ratio: 400 / 320;
+  margin-top: auto;
+}
+
+/* Desktop-only sub-footer; mobile doesn't have this bar. */
+.host-footer {
+  display: none;
+}
+
+/* Small screens keep the same relative proportions; tablet-width viewports
+   get a centered mobile column. The real desktop layout takes over at the
+   1024px breakpoint below. */
+.chrome {
+  display: none;
+}
+
+@media (min-width: 560px) and (max-width: 1023px) {
+  body {
+    display: flex;
+    justify-content: center;
+    background: #000;
+  }
+
+  .site-header,
+  .site-footer,
+  main {
+    width: 430px;
+  }
+
+  .site-header,
+  .site-footer {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================================
+   Desktop (1024px+)
+
+   Keeps the same always-on fixed header/footer and the same scroll
+   colour-switch JS as mobile (it already flips exactly at "Stop by
+   for a drink" and back at "Host at Bill's") — just repositions the
+   footer from a bottom bar to a left-centre column, matching the
+   Figma desktop frame's composition.
+   ============================================================ */
+@media (min-width: 1024px) {
+  :root {
+    /* Wider on the left than the right so section content never runs
+       into the fixed hours block pinned in the top-left corner. */
+    --gutter-desktop-left: clamp(220px, 16vw, 260px);
+    --gutter-desktop-right: clamp(40px, 8.33vw, 160px);
+    /* Body copy on dark sections runs a touch warmer than pure white
+       on desktop. */
+    --white: #ece5d0;
+  }
+
+  body {
+    display: block;
+    background: var(--navy);
+  }
+
+  main {
+    width: auto;
+  }
+
+  /* Main wordmark stays a normal top bar, same as mobile. */
+  .site-header {
+    height: auto;
+    padding: 32px var(--gutter) 16px;
+  }
+
+  .site-header .logo {
+    width: 220px;
+  }
+
+  /* Hours stay pinned top-left. No scrim on desktop — with only three
+     short lines of text, the gradient's hard-looking cutoff was more
+     awkward than just letting the text's own colour switch do the work. */
+  .site-footer,
+  .site-footer.is-light {
+    top: 0;
+    bottom: auto;
+    left: 0;
+    right: auto;
+    width: auto;
+    min-height: 0;
+    padding: 32px var(--gutter) 16px;
+    align-items: center;
+    background: none;
+  }
+
+  /* The "W" mark breaks away from the hours block to sit on its own,
+     pinned to the bottom-left corner — the hours text stays put in the
+     top-left corner. Its colour now tracks what's behind ITS OWN
+     position (via the .is-light class JS sets directly on it), not the
+     hours block's — so the reset below (same specificity as the base
+     ".site-footer.is-light .monogram" rule, winning on source order)
+     stops it inheriting that unrelated state. */
+  .site-footer .monogram {
+    position: fixed;
+    top: auto;
+    /* Vertically centred against the gold sub-footer's own height (189px)
+       so it lines up with the tagline text sitting in that bar, rather
+       than sitting low against a generic edge gutter. */
+    bottom: 68px;
+    left: var(--gutter);
+    transform: none;
+    width: 44px;
+    height: 52px;
+  }
+
+  .site-footer .monogram.monogram {
+    background-color: var(--gold);
+  }
+
+  .site-footer .monogram.is-light {
+    background-color: var(--navy-text);
+  }
+
+  /* Final transition: once the gold sub-footer on "Host at Bill's"
+     scrolls up far enough to sit behind the mark, it flips to navy so
+     it doesn't disappear against the matching gold background. */
+  .site-footer .monogram.is-on-gold {
+    background-color: var(--navy-text);
+  }
+
+  .panel {
+    padding: 150px var(--gutter-desktop-right) 80px var(--gutter-desktop-left);
+    min-height: 850px;
+    display: block;
+  }
+
+  /* Hero */
+
+  .hero {
+    padding: 178px 0 0 var(--gutter-desktop-left);
+    background-image: url("assets/homepage_hero_desktop.jpg");
+    background-size: cover;
+    background-position: center;
+    background-origin: content-box;
+    background-clip: content-box;
+    justify-content: flex-start;
+  }
+
+  .hero__scrim {
+    inset: 178px 0 0 var(--gutter-desktop-left);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 55%);
+  }
+
+  /* Sits at the smaller gutter, so it starts to the left of the photo
+     (which uses the larger one) and overlaps onto the dark margin. */
+  .hero__headline {
+    position: absolute;
+    left: var(--gutter-desktop-right);
+    bottom: 50px;
+    max-width: 620px;
+    font-size: 48px;
+    line-height: 1.17;
+  }
+
+  /* Walk-ins */
+
+  .walk-ins {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "heading heading"
+      "image   aside";
+    column-gap: 60px;
+    row-gap: 40px;
+    align-content: start;
+  }
+
+  .walk-ins .headline {
+    grid-area: heading;
+    font-size: 48px;
+    max-width: 700px;
+    margin-bottom: 0;
+  }
+
+  .placeholder--map {
+    grid-area: image;
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 809 / 506;
+    align-self: start;
+  }
+
+  .walk-ins .address {
+    grid-area: aside;
+    align-self: start;
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+
+  /* Stop by for a drink */
+
+  .drink {
+    display: block;
+  }
+
+  .drink .headline {
+    font-size: 48px;
+    margin-bottom: 48px;
+  }
+
+  .drink-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px 32px;
+  }
+
+  .drink-item,
+  .drink-item--offset,
+  .drink-item--full {
+    width: auto;
+    align-self: auto;
+    margin: 0;
+  }
+
+  .drink-item p {
+    max-width: none;
+  }
+
+  .drink-grid .drink-item:nth-child(1) { order: 1; }
+  .drink-grid .drink-item:nth-child(2) { order: 3; }
+  .drink-grid .drink-item:nth-child(3) { order: 2; }
+  .drink-grid .drink-item:nth-child(4) { order: 4; }
+  .drink-grid .drink-item:nth-child(5) { order: 5; }
+  .drink-grid .drink-item:nth-child(6) { order: 7; }
+  .drink-grid .drink-item:nth-child(7) { order: 6; }
+  .drink-grid .drink-item:nth-child(8) { order: 8; }
+
+  /* Family story */
+
+  .story {
+    display: block;
+  }
+
+  .story .headline {
+    font-size: 48px;
+    max-width: 700px;
+    margin-bottom: 48px;
+  }
+
+  /* Two columns: the first paragraph sits above a small photo on the
+     left; a larger photo sits above the second paragraph on the right,
+     starting higher than the left column to match the reference. */
+  .story__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "para1 bigImg"
+      "smallImg para2";
+    column-gap: 60px;
+    row-gap: 33px;
+    margin-bottom: 0;
+  }
+
+  .story__grid > *:nth-child(1) {
+    grid-area: smallImg;
+    /* The grid row is sized by the taller photo in the right column, so
+       the left column's shorter paragraph leaves a big empty gap above
+       this image. Pull it up to sit close under the paragraph instead. */
+    margin-top: -140px;
+    align-self: start;
+  }
+
+  .story__grid > *:nth-child(2) {
+    grid-area: para1;
+    margin-top: 131px;
+  }
+
+  .story__grid > *:nth-child(3) {
+    grid-area: bigImg;
+  }
+
+  .story__grid > *:nth-child(4) {
+    grid-area: para2;
+    width: auto;
+    justify-self: stretch;
+  }
+
+  .placeholder--portrait {
+    width: 216px;
+    height: auto;
+    aspect-ratio: 216 / 222;
+    justify-self: start;
+  }
+
+  .story__text {
+    max-width: none;
+  }
+
+  .placeholder--wide {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 457 / 347;
+    margin-top: 0;
+  }
+
+  /* Host at Bill's */
+
+  .host {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "heading heading"
+      "image   asideText"
+      "image   asideCta";
+    column-gap: 60px;
+    row-gap: 24px;
+    align-content: start;
+  }
+
+  .host .headline {
+    grid-area: heading;
+    font-size: 48px;
+    max-width: 700px;
+    margin-bottom: 0;
+  }
+
+  .placeholder--backroom {
+    grid-area: image;
+    width: 100%;
+    max-width: 576px;
+    aspect-ratio: 576 / 343;
+    margin-top: 0;
+    align-self: start;
+  }
+
+  .host__text {
+    grid-area: asideText;
+    font-size: 32px;
+    line-height: 1.25;
+    max-width: 400px;
+    margin-bottom: 0;
+    align-self: start;
+  }
+
+  .get-in-touch {
+    grid-area: asideCta;
+    font-size: 20px;
+    margin-bottom: 0;
+    align-self: start;
+  }
+
+  /* Sub-footer bar: brand mark + tagline on the left, social icons on
+     the right. Positioned to ignore the panel's own padding so it can
+     run the full width of the section. */
+  .host-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 189px;
+    padding: 0 var(--gutter-desktop-right) 0 var(--gutter-desktop-left);
+    background: var(--gold-tagline);
+  }
+
+  .host-footer__tagline {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 1.3;
+    color: var(--navy-text);
+    max-width: 460px;
+    margin: 0;
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .social-links__icon {
+    display: block;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--navy-text);
+    position: relative;
+  }
+
+  .social-links__icon::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    background-color: var(--gold-tagline);
+    -webkit-mask: no-repeat center / contain;
+    mask: no-repeat center / contain;
+  }
+
+  .social-links__icon--instagram::before {
+    -webkit-mask-image: url("assets/icon-instagram.svg");
+    mask-image: url("assets/icon-instagram.svg");
+  }
+
+  .social-links__icon--tiktok::before {
+    -webkit-mask-image: url("assets/icon-tiktok.svg");
+    mask-image: url("assets/icon-tiktok.svg");
+  }
+
+  .social-links__icon--facebook::before {
+    -webkit-mask-image: url("assets/icon-facebook.svg");
+    mask-image: url("assets/icon-facebook.svg");
+  }
+
+  .social-links__icon--whatsapp::before {
+    -webkit-mask-image: url("assets/icon-whatsapp.svg");
+    mask-image: url("assets/icon-whatsapp.svg");
+  }
+}
