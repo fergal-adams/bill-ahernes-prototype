@@ -1,0 +1,111 @@
+@font-face {
+  font-family: "Season Mix";
+  src: url("assets/Season Mix/SeasonMix-TRIAL-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Season Mix";
+  src: url("assets/Season Mix/SeasonMix-TRIAL-Heavy.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --navy: #05222f;
+  --navy-text: #05232f;
+  --gold: #f7c441;
+  --white: #fdfdfd;
+  --font-display: "Season Mix", Georgia, "Times New Roman", serif;
+  --font-body: "Season Mix", Georgia, "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 500;
+  background: var(--navy);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+.legal-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 20px 96px;
+}
+
+.legal-page__home {
+  display: inline-block;
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 40px;
+}
+
+.legal-page__home:hover {
+  text-decoration: underline;
+}
+
+.legal-page h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+
+.legal-page .updated {
+  font-size: 13px;
+  opacity: 0.7;
+  margin: 0 0 40px;
+}
+
+.legal-page h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 20px;
+  margin: 32px 0 12px;
+}
+
+.legal-page p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.legal-page a {
+  color: var(--gold);
+}
+
+.legal-page ul {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+.legal-page li {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 1024px) {
+  .legal-page {
+    padding: 80px 20px 120px;
+  }
+
+  .legal-page h1 {
+    font-size: 44px;
+  }
+}

@@ -419,6 +419,23 @@ main {
   display: none;
 }
 
+.legal-links {
+  font-size: 13px;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.legal-links a {
+  text-decoration: underline;
+}
+
+/* Mobile has no gold sub-footer to nest these in, so they get their own
+   small line at the bottom of the section instead. Desktop hides this
+   copy in favour of the one nested under the social icons below. */
+.legal-links--mobile {
+  margin-top: 24px;
+}
+
 /* Small screens keep the same relative proportions; tablet-width viewports
    get a centered mobile column. The real desktop layout takes over at the
    1024px breakpoint below. */
@@ -789,6 +806,14 @@ main {
     margin: 0;
   }
 
+  .host-footer__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
   .social-links {
     display: flex;
     align-items: center;
@@ -800,40 +825,28 @@ main {
   }
 
   .social-links__icon {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 52px;
     height: 52px;
     border-radius: 50%;
     background-color: var(--navy-text);
-    position: relative;
+    color: var(--gold-tagline);
   }
 
-  .social-links__icon::before {
-    content: "";
-    position: absolute;
-    inset: 14px;
-    background-color: var(--gold-tagline);
-    -webkit-mask: no-repeat center / contain;
-    mask: no-repeat center / contain;
+  .social-links__icon svg {
+    display: block;
+    width: 24px;
+    height: 24px;
   }
 
-  .social-links__icon--instagram::before {
-    -webkit-mask-image: url("assets/icon-instagram.svg");
-    mask-image: url("assets/icon-instagram.svg");
+  .host-footer .legal-links {
+    color: var(--navy-text);
+    opacity: 0.75;
   }
 
-  .social-links__icon--tiktok::before {
-    -webkit-mask-image: url("assets/icon-tiktok.svg");
-    mask-image: url("assets/icon-tiktok.svg");
-  }
-
-  .social-links__icon--facebook::before {
-    -webkit-mask-image: url("assets/icon-facebook.svg");
-    mask-image: url("assets/icon-facebook.svg");
-  }
-
-  .social-links__icon--whatsapp::before {
-    -webkit-mask-image: url("assets/icon-whatsapp.svg");
-    mask-image: url("assets/icon-whatsapp.svg");
+  .legal-links--mobile {
+    display: none;
   }
 }
