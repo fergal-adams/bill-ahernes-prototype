@@ -34,7 +34,7 @@
   --font-display: "Season Mix", Georgia, "Times New Roman", serif;
   --font-body: "Season Mix", Georgia, "Times New Roman", serif;
 
-  --header-height: 64px;
+  --header-height: 88px;
   --footer-height: 92px;
   --gutter: 20px;
 }
@@ -125,16 +125,15 @@ a {
 }
 
 .site-header .logo {
-  width: 190px;
-  aspect-ratio: 322 / 51;
-  background-color: var(--gold);
-  -webkit-mask: url("assets/BA_logo.svg") no-repeat center / contain;
-  mask: url("assets/BA_logo.svg") no-repeat center / contain;
-  transition: background-color 0.4s ease;
+  width: 260px;
+  height: auto;
+  display: block;
+  color: var(--gold);
+  transition: color 0.4s ease;
 }
 
 .site-header.is-light .logo {
-  background-color: var(--navy-text);
+  color: var(--navy-text);
 }
 
 /* Fixed footer */
@@ -163,10 +162,9 @@ a {
   flex-shrink: 0;
   width: 34px;
   height: 40px;
-  background-color: var(--gold);
-  -webkit-mask: url("assets/footer-logo.svg") no-repeat center / contain;
-  mask: url("assets/footer-logo.svg") no-repeat center / contain;
-  transition: background-color 0.4s ease;
+  display: block;
+  color: var(--gold);
+  transition: color 0.4s ease;
 }
 
 .site-footer .hours {
@@ -186,7 +184,7 @@ a {
 
 /* footer flips to navy over light sections */
 .site-footer.is-light .monogram {
-  background-color: var(--navy-text);
+  color: var(--navy-text);
 }
 
 .site-footer.is-light .hours {
@@ -251,9 +249,38 @@ main {
   text-decoration: underline;
 }
 
+.walk-ins .address__note {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 20px 0 0;
+  opacity: 0.7;
+}
+
 .placeholder {
   background: var(--grey-placeholder);
   border-radius: 2px;
+}
+
+/* Autoplaying image carousels that populate some placeholders. Slides are
+   stacked and crossfaded via opacity; script.js drives which one is
+   .is-active. */
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.carousel__slide.is-active {
+  opacity: 1;
 }
 
 .placeholder--map {
@@ -455,7 +482,7 @@ main {
   }
 
   .site-header .logo {
-    width: 220px;
+    width: 340px;
   }
 
   /* Hours stay pinned top-left. No scrim on desktop — with only three
@@ -495,18 +522,18 @@ main {
   }
 
   .site-footer .monogram.monogram {
-    background-color: var(--gold);
+    color: var(--gold);
   }
 
   .site-footer .monogram.is-light {
-    background-color: var(--navy-text);
+    color: var(--navy-text);
   }
 
   /* Final transition: once the gold sub-footer on "Host at Bill's"
      scrolls up far enough to sit behind the mark, it flips to navy so
      it doesn't disappear against the matching gold background. */
   .site-footer .monogram.is-on-gold {
-    background-color: var(--navy-text);
+    color: var(--navy-text);
   }
 
   .panel {
@@ -626,12 +653,13 @@ main {
   .story .headline {
     font-size: 48px;
     max-width: 700px;
-    margin-bottom: 48px;
+    margin-bottom: 28px;
   }
 
-  /* Two columns: the first paragraph sits above a small photo on the
-     left; a larger photo sits above the second paragraph on the right,
-     starting higher than the left column to match the reference. */
+  /* Two columns: the first paragraph sits close under the headline in
+     the left column; the right column's photo is pulled up so its top
+     lines up with the baseline of the headline's first line, and the
+     left column's photo is pulled up to sit close under its paragraph. */
   .story__grid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -647,17 +675,20 @@ main {
     /* The grid row is sized by the taller photo in the right column, so
        the left column's shorter paragraph leaves a big empty gap above
        this image. Pull it up to sit close under the paragraph instead. */
-    margin-top: -140px;
+    margin-top: -161px;
     align-self: start;
   }
 
   .story__grid > *:nth-child(2) {
     grid-area: para1;
-    margin-top: 131px;
   }
 
   .story__grid > *:nth-child(3) {
     grid-area: bigImg;
+    /* Pulled up out of the grid row so its top lines up with the
+       baseline of the headline's first line, rather than starting only
+       after the full two-line headline block. */
+    margin-top: -110px;
   }
 
   .story__grid > *:nth-child(4) {

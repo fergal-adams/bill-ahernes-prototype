@@ -105,5 +105,20 @@ function setupRevealOnScroll() {
   revealEls.forEach((el) => observer.observe(el));
 }
 
+function setupCarousels() {
+  document.querySelectorAll('.carousel').forEach((carousel) => {
+    const slides = carousel.querySelectorAll('.carousel__slide');
+    if (slides.length < 2) return;
+
+    let index = 0;
+    setInterval(() => {
+      slides[index].classList.remove('is-active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('is-active');
+    }, 4000);
+  });
+}
+
 setupChromeColorSwitch();
 setupRevealOnScroll();
+setupCarousels();
