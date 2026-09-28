@@ -119,6 +119,48 @@ function setupCarousels() {
   });
 }
 
+// Cookie consent. Analytics-type scripts (e.g. GA4, once added) should
+// check `hasAnalyticsConsent()` before loading rather than firing
+// unconditionally, so tracking only ever runs after the visitor accepts.
+const COOKIE_CONSENT_KEY = 'bill-ahernes-cookie-consent';
+
+function hasAnalyticsConsent() {
+  try {
+    return localStorage.getItem(COOKIE_CONSENT_KEY) === 'accepted';
+  } catch (e) {
+    return false;
+  }
+}
+window.hasAnalyticsConsent = hasAnalyticsConsent;
+
+function setupCookieBanner() {
+  const banner = document.getElementById('cookieBanner');
+  if (!banner) return;
+
+  let stored = null;
+  try {
+    stored = localStorage.getItem(COOKIE_CONSENT_KEY);
+  } catch (e) {
+    /* localStorage unavailable (private mode etc.) — leave the banner
+       showing every visit rather than breaking the page. */
+  }
+
+  if (!stored) {
+    banner.hidden = false;
+  }
+
+  function choose(value) {
+    banner.hidden = true;
+    try {
+      localStorage.setItem(COOKIE_CONSENT_KEY, value);
+    } catch (e) {}
+  }
+
+  document.getElementById('cookieAccept').addEventListener('click', () => choose('accepted'));
+  document.getElementById('cookieDecline').addEventListener('click', () => choose('declined'));
+}
+
 setupChromeColorSwitch();
 setupRevealOnScroll();
 setupCarousels();
+setupCookieBanner();
