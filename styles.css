@@ -209,7 +209,7 @@ main {
 /* Hero */
 
 .hero {
-  background-image: url("assets/homepage_hero_mobile.jpg");
+  background-image: url("assets/homepage_header.webp");
   background-size: cover;
   background-position: center;
   justify-content: flex-start;
@@ -563,7 +563,7 @@ main {
 
   .hero {
     padding: 178px 0 0 var(--gutter-desktop-left);
-    background-image: url("assets/homepage_hero_desktop.jpg");
+    background-image: url("assets/homepage_header.webp");
     background-size: cover;
     background-position: center;
     background-origin: content-box;
@@ -636,7 +636,7 @@ main {
 
   .drink-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 48px 32px;
   }
 
@@ -652,14 +652,6 @@ main {
     max-width: none;
   }
 
-  .drink-grid .drink-item:nth-child(1) { order: 1; }
-  .drink-grid .drink-item:nth-child(2) { order: 3; }
-  .drink-grid .drink-item:nth-child(3) { order: 2; }
-  .drink-grid .drink-item:nth-child(4) { order: 4; }
-  .drink-grid .drink-item:nth-child(5) { order: 5; }
-  .drink-grid .drink-item:nth-child(6) { order: 7; }
-  .drink-grid .drink-item:nth-child(7) { order: 6; }
-  .drink-grid .drink-item:nth-child(8) { order: 8; }
 
   /* Family story */
 
